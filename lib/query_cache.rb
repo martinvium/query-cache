@@ -40,6 +40,10 @@ module QueryCache
 
     private
 
+    def base
+      self.class.base
+    end
+
     def restore_query_cache_settings(connection_id, enabled)
       base.connection_id = connection_id
       base.connection.clear_query_cache
