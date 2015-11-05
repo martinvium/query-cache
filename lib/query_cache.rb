@@ -35,7 +35,7 @@ module QueryCache
     end
 
     def self.to_s
-      "#{self.class}<#{base}>"
+      base ? "#{superclass.name}<#{base.name}>" : name
     end
 
     private
