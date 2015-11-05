@@ -10,7 +10,9 @@ require "rack/body_proxy"
 # https://github.com/rails/rails/blob/4-2-stable/activerecord/lib/active_record/query_cache.rb
 module QueryCache
   class Middleware
-    cattr_accessor :base
+    class << self
+      attr_accessor :base
+    end
 
     def initialize(app)
       @app = app
@@ -30,6 +32,10 @@ module QueryCache
       response
     ensure
       restore_query_cache_settings(connection_id, enabled)
+    end
+
+    def self.to_s
+      "#{self.class}<#{base}>"
     end
 
     private
